@@ -8,7 +8,7 @@ function UserController() {
       .then((data) => {
 
         res.render('users/list', { 
-          title: "Lista de Tarefas",
+          title: "Lista de Usuários",
           users: data, 
         })
       })

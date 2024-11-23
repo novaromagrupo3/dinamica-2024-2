@@ -80,20 +80,18 @@ function UserController() {
 
   }
 
-  // function update(req, res) {
-  //   console.log(req.body);
-  //   const id = req.body.id
-
-  //   const user = {
-  //     title: req.body.title,
-  //     description: req.body.description,
-  //     done: req.body.done === '1' ? true : false
-  //   }
-
-  //   User.update(user, { where: { id: id } })
-  //     .then(res.redirect('/users'))
-  //     .catch((err) => console.log(err))
-  // }
+   // function update(req, res) {
+   //   console.log(req.body);
+   //   const id = req.body.i 
+   //   const user = {
+   //     title: req.body.title,
+   //     description: req.body.description,
+   //     done: req.body.done === '1' ? true : false,
+       
+        //user.update(user, { where: { id: id } })
+        //.then(res.redirect('/users'))
+        //.catch((err) => console.log(err))
+    
 
     async function login(req, res) {
       const { username, password } = req.body;
@@ -132,10 +130,10 @@ function UserController() {
       list,
       show,
       remove,
-      login
-      // update,
+      login,
+      //update
     }
 
-}
+  }
 
 module.exports = UserController();
