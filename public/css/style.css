@@ -36,13 +36,6 @@
     padding: 50px;
 }
 
-.footer {
-    height: auto;
-    width: auto;
-    max-width: 100%;
-
-}
-
 .concluido td:not(:last-child) {
     text-decoration-line: line-through;
     text-decoration-thickness: 2px;
@@ -54,4 +47,7 @@
 .btn-primary:hover{
     background-color: #20c997;
     border: 0;
+}
+h3{
+    color: #20c997;
 }

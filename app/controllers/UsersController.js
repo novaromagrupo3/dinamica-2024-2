@@ -73,8 +73,6 @@ function UserController() {
   async function update(req, res) {
     const { id, name, email, password, active } = req.body;
 
-    console.log('Dados recebidos no corpo da requisição:', req.body)
-
     const user = {
       name,
       email,
