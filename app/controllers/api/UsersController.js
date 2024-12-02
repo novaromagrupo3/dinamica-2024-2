@@ -1,17 +1,15 @@
 const User = require('../../models/User');
+const useUserRepository = require('../../repositories/UsersRepository');
 const bcrypt = require('bcrypt');
+const usersRepository = useUserRepository(); 
 
 function UserController() {
 
   async function list(req, res) {
 
     try {
-      const users = await User.findAll({ 
-        attributes: { exclude: ['password'] },
-        raw: true 
-      })
+      const users = await usersRepository.list()
       res.status(200).json(users);
-      
     } catch (error) {
       res.status(500).json({
         message: "Erro ao listar usuários"
@@ -24,7 +22,7 @@ function UserController() {
 
     try {
 
-      const user = await User.findByPk(req.params.id);
+      const user = await usersRepository.find(req.params.id);
 
       if (!user) {
         return res.status(404).send({
@@ -52,16 +50,14 @@ function UserController() {
       });
     }
 
-    const hashed_password = await bcrypt.hash(req.body.password, 10);
-
     const user = {
       name: req.body.name,
       email: req.body.email,
-      password: hashed_password,
+      password: req.body.password,
     }
 
     try {
-      const user_created = await User.create(user);
+      const user_created = await usersRepository.save(user);
       return res.status(201).json(user_created);
     } catch (error) {
       return res.status(500).json({
@@ -73,7 +69,7 @@ function UserController() {
   async function remove(req, res) {
     const id = req.params.id;
 
-    await User.destroy({ where: { id: id } });
+    await usersRepository.remove(id);
     return res.status(200).json({
       message: "Usuário removida."
     });
@@ -94,12 +90,12 @@ function UserController() {
     
 
     async function login(req, res) {
-      const { username, password } = req.body;
+      const { email, password } = req.body;
 
       try {
-        // Encontre o usuário pelo nome de usuário
+        // Encontre o usuário pelo email de usuário
         const user = await User.findOne({
-          where: { email: username },
+          where: { email: email },
         });
 
         // Verifique se o usuário existe
